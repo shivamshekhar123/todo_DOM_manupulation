@@ -1,0 +1,66 @@
+/* loadTodos() Function
+    * Purpose: This function loads todos from the browser's localStorage.
+    * How it works:
+    * localStorage.getItem("todos") retrieves a JSON string from localStorage associated with the key "todos".
+    * JSON.parse() is used to convert the JSON string back into an object. If there are no todos stored yet, the function initializes an empty object with the structure {"todoList": []}.
+    * The console.log(todos) line outputs the loaded todos to the console for debugging.
+    * The function finally returns the todos object.
+    */
+
+
+ /* addTodoToLocalStorage(todoText) Function
+    * Purpose: Adds a new todo to the localStorage.
+    * How it works:
+    * Calls the loadTodos() function to retrieve the current list of todos from localStorage.
+    * Adds the new todo (todoText) to the todoList array in the todos object.
+    * Stores the updated todos object back in localStorage using JSON.stringify() to convert the object back into a JSON string. 
+    */ 
+
+  /* appendTodoInHtml(todoText) Function
+    * Purpose: Appends a new todo item to the HTML view.
+    * How it works:
+    * Selects the ul element with the id todoList.
+    * Creates a new li element to represent the todo item.
+    * Sets the text content of the li element to the todoText.
+    * Appends the new li element to the todoList in the HTML, making the new todo visible to the user. 
+     */
+
+   /* Document's DOMContentLoaded Event Listener
+     * Purpose: This event listener ensures that the code inside it is executed only after the DOM is fully loaded.
+     * How it works:
+     * Selects the relevant HTML elements like the input field (todoInput), submit button (submitButton), and the todo list (todoList).
+     * Adds event listeners to handle input changes and button clicks.
+     * 
+     */
+
+
+    /**
+    * todoInput.addEventListener("change", ...)
+    * Purpose: To capture and trim the text from the input field when the user changes its value.
+    * How it works:
+    * When a user types something in the input field, the change event is fired. This event triggers the callback function.
+    * The event.target.value gets the text typed in the input field.
+    * The trim() function is used to remove leading and trailing spaces from the input value.
+    */
+
+    
+    /**
+    * submitButton.addEventListener("click", ...)
+    * Purpose: To add the todo to localStorage and display it on the page when the user clicks the submit button.
+    * How it works:
+    * When the button is clicked, it first checks if the todoInput value is empty. If so, an alert prompts the user to write something.
+    * If the input is not empty, the todo is added to localStorage using the addTodoToLocalStorage(todoText) function.
+    * The new todo is appended to the HTML view by calling the appendTodoInHtml(todoText) function.
+    * After that, the input field is cleared for the next entry.
+    */
+
+    
+     /**
+    * Loading and Displaying Todos on Page Load
+    * Purpose: To display the todos stored in localStorage when the page is loaded or refreshed.
+    * How it works:
+    * Calls the loadTodos() function to retrieve the stored todos from localStorage.
+    * Iterates over the todoList array using forEach().
+    * For each todo, a new li element is created and added to the todoList in the HTML
+     */
+
