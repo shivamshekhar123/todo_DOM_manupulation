@@ -39,6 +39,7 @@ h1{
     margin-right: 10px;
     border: 2px solid #ddd;
     border-radius: 5px;
+    transition: background-color 0.4s;
 }
 
 #addTodo{
@@ -48,6 +49,10 @@ h1{
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
+}
+
+#addTodo:hover{
+    background-color: var(--btn-complete);
 }
 
 ul{
@@ -80,6 +85,11 @@ li:hover{
 
 .editBtn{
     background-color: var(--btn-edit);
+    transition: background-color 0.3s;
+}
+
+.editBtn:hover, .deleteBtn:hover, .completeBtn:hover{
+    background-color: var(--btn-active);
 }
 .deleteBtn{
     background-color: var(--btn-delete);

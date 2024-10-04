@@ -69,6 +69,7 @@ function appendTodoInHtml(todo) {
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
     editBtn.classList.add("editBtn");
+    editBtn.addEventListener("click",editTodo)
 
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
@@ -125,6 +126,21 @@ function toggleTodo(event) {
    
 }
 
+//Function edit todo
+function editTodo(event){
+    const todoItem = event.target.parentElement.parentElement; // Get the clicked todo item
+    const todoId = todoItem.getAttribute("data-id"); // Get the ID of the todo item
+    let todos = loadTodos(); // Load current todos
+    const response = prompt("what is the new todo value you want to set ?")
+    todos.todoList.forEach(todo => {
+        if (todo.id == todoId) {
+            todo.text = response;
+        }
+    });
+    refreshTodos(todos); // Update the todos in localStorage
+    resetHtmlTodos(todos)
+}
+
 //Function Delete todo
 function deleteTodo(event){
     const todoItem = event.target.parentElement.parentElement; // Get the clicked todo item
@@ -136,6 +152,19 @@ function deleteTodo(event){
     refreshTodos(todos)
     resetHtmlTodos(todos)
 
+}
+
+function addNewTodo(){
+    const todoText = todoInput.value;
+    if (todoText === '') {
+        alert("Please write something for the todo");
+    } else {
+        todos = loadTodos(); // Reload todos before adding a new one
+        const id = todos.todoList.length; // Assign a new ID based on the length of the todo list
+        addTodoToLocalStorage({ text: todoText, isCompleted: false, id }); // Add new todo
+        appendTodoInHtml({ text: todoText, isCompleted: false, id }); // Display the new todo in the UI
+        todoInput.value = ''; // Clear the input field
+    }
 }
 
 // Event listener for when the DOM is fully loaded
@@ -163,28 +192,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Event listener for the submit button (adding new todo)
-    submitButton.addEventListener("click", (event) => {
-        const todoText = todoInput.value;
-        if (todoText === '') {
-            alert("Please write something for the todo");
-        } else {
-            todos = loadTodos(); // Reload todos before adding a new one
-            const id = todos.todoList.length; // Assign a new ID based on the length of the todo list
-            addTodoToLocalStorage({ text: todoText, isCompleted: false, id }); // Add new todo
-            appendTodoInHtml({ text: todoText, isCompleted: false, id }); // Display the new todo in the UI
-            todoInput.value = ''; // Clear the input field
-        }
-    });
+    submitButton.addEventListener("click", addNewTodo);
 
     // Render the todos on page load
     todos.todoList.forEach(todo => {
         appendTodoInHtml(todo); // Display each todo in the UI
     });
 
+    //add todo on enter press
+    document.addEventListener("keypress" , (event) => {
+        if(event.code == "Enter"){
+            addNewTodo()
+        }
+    })
 
 
 });
 
 
-
-//20.09 set attribute
+//adding dom prompts
